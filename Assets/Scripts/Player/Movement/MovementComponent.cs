@@ -30,7 +30,7 @@ namespace Player.Movement
         private float coyoteTimeDuration = 0.1f;
 
         //Rotation
-        [SerializeField, Range(1, 720), FoldoutGroup("Rotation")]
+        [SerializeField, Range(1, 1440), FoldoutGroup("Rotation")]
         private float rotationSpeed = 360.0f;
         
         [SerializeField, Range(0, 20), FoldoutGroup("Rotation")]
