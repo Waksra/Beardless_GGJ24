@@ -316,8 +316,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: BeardlessJam/BeardlessJam.fspro
-  sourceBankPath: BeardlessJam/Build
+  sourceProjectPath: FMODProject/BeardlessJam.fspro
+  sourceBankPath: FMODProject/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1

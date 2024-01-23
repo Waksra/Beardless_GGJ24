@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{ab0af238-fd84-42eb-9631-1353780600cb}">
+	<object class="AudioFile" id="{9255e7db-d9d3-48eb-ae19-1b0afb1c1855}">
 		<property name="assetPath">
-			<value>Footstep1.wav</value>
+			<value>Footstep2.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
