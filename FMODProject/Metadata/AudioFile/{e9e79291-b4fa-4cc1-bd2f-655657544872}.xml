@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{360976bc-e901-4767-819b-29375dad3cd0}">
+	<object class="AudioFile" id="{e9e79291-b4fa-4cc1-bd2f-655657544872}">
 		<property name="assetPath">
-			<value>SFX/Footstep3.wav</value>
+			<value>Music/Bassline1.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
@@ -11,7 +11,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>0.16893424036281179</value>
+			<value>5.5100907029478456</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{cd048481-a9e9-4cfb-95f9-eb4c7a659cfb}</destination>

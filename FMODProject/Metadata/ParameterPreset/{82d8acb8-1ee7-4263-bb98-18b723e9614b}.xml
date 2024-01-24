@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{82d8acb8-1ee7-4263-bb98-18b723e9614b}">
+		<property name="name">
+			<value>Modulate Filter</value>
+		</property>
+		<relationship name="folder">
+			<destination>{1b52ab55-9afa-461a-9794-16a032beb439}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{410b925b-eeac-4e7c-b9d2-7d69c4fb630c}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{410b925b-eeac-4e7c-b9d2-7d69c4fb630c}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="velocity">
+			<value>0.019999999552965164</value>
+		</property>
+	</object>
+</objects>
