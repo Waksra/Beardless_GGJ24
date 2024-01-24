@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2833829514018688887}
   - component: {fileID: 8462016340098313610}
   - component: {fileID: 8650928575985049545}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2929436331143845101}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 7074347999390216537}
   - component: {fileID: 3846328263726179225}
   - component: {fileID: 6036942892075571275}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 5457375796406017763}
   - component: {fileID: 2831997257463051777}
   - component: {fileID: 8039477457120318065}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
