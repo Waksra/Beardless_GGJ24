@@ -1,4 +1,6 @@
-﻿using Player.Movement;
+﻿using Combat;
+using General;
+using Player.Movement;
 using Player.Movement.StateMachine;
 using UnityEngine;
 
@@ -8,6 +10,8 @@ namespace Player
     {
         private MovementComponent movementComponent;
         private MovementStateMachine movementStateMachine;
+        
+        private TimedEnabler kicker;
 
         private float timeOfJumpRequestEnd;
         
@@ -22,6 +26,8 @@ namespace Player
             
             movementStateMachine = new MovementStateMachine(this);
             movementStateMachine.Enter();
+            
+            kicker = GetComponentInChildren<TimedEnabler>();
 
             DesiredRotation = transform.rotation.eulerAngles.y;
         }
@@ -40,6 +46,12 @@ namespace Player
             else if (IsJumpRequested && Time.realtimeSinceStartup >= timeOfJumpRequestEnd)
             {
                 IsJumpRequested = false;
+            }
+            
+            if (InputHandler.KickInput)
+            {
+                kicker.EnableForTime();
+                InputHandler.KickInput.Consume();
             }
         }
 

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,11 +13,13 @@ namespace Player
         private InputHolder<Vector2> lookInput;
         private InputHolder<bool> jumpInput;
         private InputHolder<bool> sprintInput;
+        private InputHolder<bool> kickInput;
 
         public static ref InputHolder<Vector2> MoveInput => ref GetInstance().moveInput;
         public static ref InputHolder<Vector2> LookInput => ref GetInstance().lookInput;
         public static ref InputHolder<bool> JumpInput => ref GetInstance().jumpInput;
         public static ref InputHolder<bool> SprintInput => ref GetInstance().sprintInput;
+        public static ref InputHolder<bool> KickInput => ref GetInstance().kickInput;
 
         private void Awake()
         {
@@ -88,6 +89,12 @@ namespace Player
         {
             if (Application.isFocused)
                 lookInput.SetValue(context.ReadValue<Vector2>());
+        }
+        
+        public void OnKick(InputAction.CallbackContext context)
+        {
+            if (context.started)
+                kickInput.SetValue(true);
         }
 
         public struct InputHolder<T>

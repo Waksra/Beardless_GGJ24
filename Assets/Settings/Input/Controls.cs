@@ -62,6 +62,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Kick"",
+                    ""type"": ""Button"",
+                    ""id"": ""a673b555-7aba-4179-ac72-af082d296b93"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4b01e13-8465-4bd4-8df3-7e86de5e4a0f"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Kick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dcf82774-6dcb-4b69-bbc0-55f55fac541f"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Kick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -208,6 +239,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_PlayerController_Jump = m_PlayerController.FindAction("Jump ", throwIfNotFound: true);
         m_PlayerController_Look = m_PlayerController.FindAction("Look", throwIfNotFound: true);
         m_PlayerController_Sprint = m_PlayerController.FindAction("Sprint", throwIfNotFound: true);
+        m_PlayerController_Kick = m_PlayerController.FindAction("Kick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +305,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerController_Jump;
     private readonly InputAction m_PlayerController_Look;
     private readonly InputAction m_PlayerController_Sprint;
+    private readonly InputAction m_PlayerController_Kick;
     public struct PlayerControllerActions
     {
         private @Controls m_Wrapper;
@@ -281,6 +314,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerController_Jump;
         public InputAction @Look => m_Wrapper.m_PlayerController_Look;
         public InputAction @Sprint => m_Wrapper.m_PlayerController_Sprint;
+        public InputAction @Kick => m_Wrapper.m_PlayerController_Kick;
         public InputActionMap Get() { return m_Wrapper.m_PlayerController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -302,6 +336,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @Kick.started += instance.OnKick;
+            @Kick.performed += instance.OnKick;
+            @Kick.canceled += instance.OnKick;
         }
 
         private void UnregisterCallbacks(IPlayerControllerActions instance)
@@ -318,6 +355,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @Kick.started -= instance.OnKick;
+            @Kick.performed -= instance.OnKick;
+            @Kick.canceled -= instance.OnKick;
         }
 
         public void RemoveCallbacks(IPlayerControllerActions instance)
@@ -341,5 +381,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnKick(InputAction.CallbackContext context);
     }
 }
