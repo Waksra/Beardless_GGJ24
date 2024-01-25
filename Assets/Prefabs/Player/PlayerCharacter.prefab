@@ -308,7 +308,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1312a9f52b2b4fecbf0d03994b5b4b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitForce: 50
+  hitForce: 15
+  hitType: 1
+  customHitDirection: {x: 0, y: 0.4472136, z: 0.8944272}
 --- !u!114 &7043338469488973598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,7 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186848e623a7493f8f6c5d3b2b4e8d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToEnable: 0.5
+  timeToEnable: 0.2
   onEnable:
     m_PersistentCalls:
       m_Calls:
