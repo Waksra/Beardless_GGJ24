@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6745224357739337930}
   - component: {fileID: 6757111732119966063}
   - component: {fileID: 6301810704287456926}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4088730358091765376}
   - component: {fileID: 4064170157084111164}
   - component: {fileID: 6881279830314431669}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &4088730358091765376
 MonoBehaviour:
