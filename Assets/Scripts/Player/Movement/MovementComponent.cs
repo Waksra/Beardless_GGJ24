@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 using Utils;
 
 namespace Player.Movement
@@ -75,6 +76,11 @@ namespace Player.Movement
         private Rigidbody body;
         private new Transform transform;
         
+        //Events
+        public UnityEvent OnJump;
+        
+        public UnityEvent OnLeftGround;
+        public UnityEvent OnLand;
         
         //General Properties
         public Vector3 Velocity => body.velocity;
@@ -148,8 +154,14 @@ namespace Player.Movement
             }
 
             if (previouslyGrounded && !isGrounded)
+            {
                 timeOfCoyoteTimeEnd = Time.realtimeSinceStartup + coyoteTimeDuration;
-
+                OnLeftGround?.Invoke();
+            }
+            else if (isGrounded && !previouslyGrounded)
+            {
+                OnLand?.Invoke();
+            }
         }
 
         public void MoveAlongGround(Vector2 direction)
@@ -212,6 +224,8 @@ namespace Player.Movement
             body.velocity += jumpDirection * jumpSpeed;
 
             timeOfCoyoteTimeEnd = 0f;
+            
+            OnJump?.Invoke();
         }
 
         public void ApplyRideForce()

@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 7074347999390216537}
   - component: {fileID: 3846328263726179225}
   - component: {fileID: 6036942892075571275}
+  - component: {fileID: 6268781797500452390}
   m_Layer: 3
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -507,6 +508,15 @@ MonoBehaviour:
   groundCheckDistance: 2.5
   rideSpringFrequency: 12
   rideSpringDamping: 0.7
+  OnJump:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLeftGround:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLand:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &3846328263726179225
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -557,6 +567,20 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6268781797500452390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047563362182737964}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e55b46ee73747cba968f19d49d352f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 10
+  parameterName: 
 --- !u!1 &8147018901262732886
 GameObject:
   m_ObjectHideFlags: 0
