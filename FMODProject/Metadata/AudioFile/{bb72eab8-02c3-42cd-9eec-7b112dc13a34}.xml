@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{1dba1bca-cdd6-4770-91c3-37ae893eef77}">
+	<object class="AudioFile" id="{bb72eab8-02c3-42cd-9eec-7b112dc13a34}">
 		<property name="assetPath">
-			<value>Music/OneShot.wav</value>
+			<value>Music/OneShot4.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
@@ -11,7 +11,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>2.4138095238095238</value>
+			<value>1.7241496598639456</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{cd048481-a9e9-4cfb-95f9-eb4c7a659cfb}</destination>
