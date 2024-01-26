@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{51a50e0a-788f-4630-b338-605a83834d93}">
+		<property name="assetPath">
+			<value>SFX/KickSwoosh.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.8890929705215419</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{cd048481-a9e9-4cfb-95f9-eb4c7a659cfb}</destination>
+		</relationship>
+	</object>
+</objects>

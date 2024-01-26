@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e5b9e0b3-7bdb-484a-8282-169cdf8c7bf6}">
+		<property name="assetPath">
+			<value>SFX/KickImpact.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.5093197278911565</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{cd048481-a9e9-4cfb-95f9-eb4c7a659cfb}</destination>
+		</relationship>
+	</object>
+</objects>

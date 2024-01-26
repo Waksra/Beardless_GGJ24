@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{42833139-1931-4bee-820f-de4abdb61225}">
+		<property name="assetPath">
+			<value>SFX/HorseHit.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.5224716553287982</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{cd048481-a9e9-4cfb-95f9-eb4c7a659cfb}</destination>
+		</relationship>
+	</object>
+</objects>
