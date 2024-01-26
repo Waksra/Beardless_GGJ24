@@ -355,11 +355,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1308897979
-      Data2: 1199770379
-      Data3: -1808182849
-      Data4: -1410664749
-    Path: event:/Footsteps
+      Data1: 221975813
+      Data2: 1100639659
+      Data3: -346913637
+      Data4: -352011223
+    Path: event:/KickSwoosh
   Event: 
   PlayEvent: 0
   StopEvent: 0
