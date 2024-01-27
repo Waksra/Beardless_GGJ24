@@ -249,10 +249,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6723069535098219525}
-  - component: {fileID: 2157497808501637815}
   - component: {fileID: 4236012361683693869}
   - component: {fileID: 7043338469488973598}
   - component: {fileID: 5762797326829400789}
+  - component: {fileID: 2157497808501637815}
   - component: {fileID: 4703507917571632303}
   m_Layer: 0
   m_Name: Kickbox
@@ -270,33 +270,12 @@ Transform:
   m_GameObject: {fileID: 1057465866694499317}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.82}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1016054154687299405}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2157497808501637815
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057465866694499317}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6, y: 1.2, z: 1.6}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4236012361683693869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,6 +350,27 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!65 &2157497808501637815
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057465866694499317}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.6, y: 2.5, z: 1.6}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &4703507917571632303
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -386,11 +386,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2, y: 1.2, z: 1}
+  m_Size: {x: 1.2, y: 2.5, z: 1}
   m_Center: {x: 0, y: 0, z: 0.3}
 --- !u!1 &3953864544356896062
 GameObject:
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4047563362182737964}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e55b46ee73747cba968f19d49d352f8, type: 3}
   m_Name: 

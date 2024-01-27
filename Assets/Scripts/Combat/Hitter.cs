@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ namespace Combat
 
         [SerializeField, EnableIf("hitType", HitType.Custom)]
         private Vector3 customHitDirection = Vector3.zero;
+        
+        private List<Collider> hitColliders = new List<Collider>();
 
         [Button, EnableIf("hitType", HitType.Custom)]
         private void NormalizeCustomHitDirection()
@@ -36,23 +39,31 @@ namespace Combat
             NormalizeCustomHitDirection();
         }
 
+        private void FixedUpdate()
+        {
+            hitColliders.Clear();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Hittable hittable))
+            if (other.TryGetComponent(out Hittable hittable) && !hitColliders.Contains(other))
             {
                 Vector3 direction = GetDirection(other);
                 hittable.Hit(new HitData(direction * hitForce));
+                
+                hitColliders.Add(other);
             }
         }
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.collider.TryGetComponent(out Hittable hittable))
+            if (other.collider.TryGetComponent(out Hittable hittable) && !hitColliders.Contains(other.collider))
             {
                 Vector3 direction = GetDirection(other);
 
                 hittable.Hit(new HitData(direction * hitForce));
+                
+                hitColliders.Add(other.collider);
             }
         }
 
