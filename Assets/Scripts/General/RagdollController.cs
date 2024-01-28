@@ -44,6 +44,7 @@ namespace General
 
             foreach (var body in bodies)
             {
+                body.velocity = Vector3.zero;
                 body.isKinematic = true;
             }
 
@@ -81,6 +82,11 @@ namespace General
         {
             EnableRagdoll();
             ApplyForce(hitData.Force);
+        }
+        
+        public void Recover()
+        {
+            DisableRagdoll();
         }
     }
 }

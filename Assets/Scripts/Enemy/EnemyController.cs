@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Combat;
 using General;
 using Pathfinding;
@@ -17,6 +18,9 @@ namespace Enemy
 
         private RagdollController ragdollController;
         private RichAI aiPather;
+
+        [SerializeField]
+        private Transform rigRoot;
         
         private static readonly int MoveSpeed = Animator.StringToHash("MoveSpeed");
 
@@ -31,12 +35,30 @@ namespace Enemy
             aiPather = GetComponent<RichAI>();
         }
 
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+        }
+
+        private void Update()
+        {
+            if (aiPather.reachedDestination)
+            {
+                InitiateAttack();
+            } 
+        }
+
         private void LateUpdate()
         {
             float moveSpeed = aiPather.velocity.magnitude;
             float normalizedSpeed = Mathf.Clamp01(moveSpeed / aiPather.maxSpeed);
             
             animator.SetFloat(MoveSpeed, normalizedSpeed);
+        }
+
+        private void InitiateAttack()
+        {
+            
         }
 
         public void HitResponse(HitData hitData)
@@ -49,6 +71,31 @@ namespace Enemy
             ragdollController.HitResponse(hitData);
 
             aiPather.enabled = false;
+            
+            StartCoroutine(KnockoutTimer());
+        }
+        
+        private void AlignToRoot()
+        {
+            Vector3 rootPosition = rigRoot.position;
+            transform.position = rootPosition;
+            
+            rigRoot.position = rootPosition;
+        } 
+        
+        private IEnumerator KnockoutTimer()
+        {
+            yield return new WaitForSeconds(knockoutTime);
+            
+            ragdollController.Recover();
+            AlignToRoot();
+            
+            animator.enabled = true;
+            
+            body.isKinematic = false; 
+            collider.enabled = true;
+            
+            aiPather.enabled = true;
         }
     }
 }
