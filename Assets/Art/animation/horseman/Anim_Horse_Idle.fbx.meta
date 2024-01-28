@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f5c709546de3b1b468ead2f20866fd48
+guid: c8e271586b6de3841a7b1700bdad24c9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,18 +33,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: dropkick
+      name: idle
       takeName: root|rigAction
       internalID: -5729030048419175771
-      firstFrame: 5.7
-      lastFrame: 34.5
+      firstFrame: 35.7
+      lastFrame: 35.8
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

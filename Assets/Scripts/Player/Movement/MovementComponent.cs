@@ -1,6 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Utils;
 
 namespace Player.Movement
@@ -11,11 +12,11 @@ namespace Player.Movement
         //Grounded Values
         [SerializeField, TitleGroup("Movement")]
         private MovementValues groundedValues;
-        
+
         //Airborne Values
         [SerializeField, TitleGroup("Movement")]
         private MovementValues airborneValues;
-        
+
         //Slopes
         [SerializeField, Range(0, 90), TitleGroup("Movement/Slopes")]
         private float maxSlopeAngel = 50.0f;
@@ -33,10 +34,10 @@ namespace Player.Movement
         //Rotation
         [SerializeField, Range(1, 1440), FoldoutGroup("Rotation")]
         private float rotationSpeed = 360.0f;
-        
+
         [SerializeField, Range(0, 20), FoldoutGroup("Rotation")]
         private float rotationSpringFrequency = 14.0f;
-        
+
         [SerializeField, Range(-1, 2), FoldoutGroup("Rotation")]
         private float rotationSpringDamping = 1.0f;
 
@@ -53,9 +54,21 @@ namespace Player.Movement
         [SerializeField, Range(0, 20), FoldoutGroup("Ride")]
         private float rideSpringDamping = 1.0f;
 
+        //Events
+        [SerializeField, FoldoutGroup("Events")]
+        private UnityEvent onJump;
+
+        [SerializeField, FoldoutGroup("Events")]
+        private UnityEvent onLeftGround;
+
+        [SerializeField, FoldoutGroup("Events")]
+        private UnityEvent onLand;
+
+        [SerializeField] private Transform feetTransform;
+
         //Internal
         private MovementValues currentValues;
-        
+
         private float rotationProportionalGain;
         private float rotationDerivativeGain;
 
@@ -75,38 +88,33 @@ namespace Player.Movement
 
         private Rigidbody body;
         private new Transform transform;
-        
-        //Events
-        public UnityEvent OnJump;
-        
-        public UnityEvent OnLeftGround;
-        public UnityEvent OnLand;
-        
+
+
         //General Properties
         public Vector3 Velocity => body.velocity;
-        
+
         public MovementValues CurrentValues => currentValues;
         public MovementValues GroundedValues => groundedValues;
         public MovementValues AirborneValues => airborneValues;
-        
+
         //Rotation Properties
         public float RotationSpeed => rotationSpeed;
-        
+
         //Jump Properties
         public float JumpInputBufferDuration => jumpInputBufferDuration;
-        
+
         //Grounded Properties
         public bool IsGrounded => isGrounded || Time.realtimeSinceStartup < timeOfCoyoteTimeEnd;
         public float DistanceToGround => distanceToGround;
 
-        
+
         //Methods
         private void OnValidate()
         {
             minGroundDot = Mathf.Cos(maxSlopeAngel * Mathf.Deg2Rad);
             rideSpringParams =
                 Spring.CalcDampedSpringMotionParams(Time.fixedDeltaTime, rideSpringFrequency, rideSpringDamping);
-            
+
             rotationProportionalGain = 6f * rotationSpringFrequency * (6f * rotationSpringFrequency) * 0.25f;
             rotationDerivativeGain = 4.5f * rotationSpringFrequency * rotationSpringDamping;
         }
@@ -114,7 +122,7 @@ namespace Player.Movement
         private void Awake()
         {
             OnValidate();
-            
+
             body = GetComponent<Rigidbody>();
             transform = GetComponent<Transform>();
 
@@ -125,19 +133,19 @@ namespace Player.Movement
         public void GroundCheck()
         {
             //TODO: Refactor this so that state is held during coyote time
-            
+
             Vector3 position = body.position;
             Ray ray = new Ray(position, Vector3.down);
-            
+
             bool previouslyGrounded = isGrounded;
             bool previouslyOnSteep = onSteep;
 
             isGrounded = false;
             onSteep = false;
-            
+
             groundNormal = Vector3.up;
             desiredRidePosition = position.y;
-            
+
             Debug.DrawLine(position, position + Vector3.down * groundCheckDistance, Color.red);
 
             if (Physics.Raycast(ray, out RaycastHit hitInfo, groundCheckDistance))
@@ -147,8 +155,11 @@ namespace Player.Movement
                 desiredRidePosition = hitInfo.point.y + rideHeight;
 
                 if (hitInfo.normal.y >= minGroundDot && (previouslyGrounded || distanceToGround < rideHeight))
+                {
                     isGrounded = true;
-                
+                    feetTransform.position = hitInfo.point;
+                }
+
                 else if (previouslyOnSteep || previouslyGrounded || distanceToGround < rideHeight)
                     onSteep = true;
             }
@@ -156,11 +167,12 @@ namespace Player.Movement
             if (previouslyGrounded && !isGrounded)
             {
                 timeOfCoyoteTimeEnd = Time.realtimeSinceStartup + coyoteTimeDuration;
-                OnLeftGround?.Invoke();
+                feetTransform.localPosition = Vector3.zero;
+                onLeftGround?.Invoke();
             }
             else if (isGrounded && !previouslyGrounded)
             {
-                OnLand?.Invoke();
+                onLand?.Invoke();
             }
         }
 
@@ -168,45 +180,46 @@ namespace Player.Movement
         {
             //TODO: Reconsider how to handle velocity, repeated changes to velocity might have performance issues.
             Vector3 velocity = body.velocity;
-            
+
             Vector3 xAxis = ProjectOnContactPlane(transform.right).normalized;
             Vector3 zAxis = ProjectOnContactPlane(transform.forward).normalized;
 
             Vector2 adjustment = Vector2.zero;
-            
+
             float speed = GetSpeed();
-            
+
             adjustment.x = direction.x * speed - Vector3.Dot(velocity, xAxis);
             adjustment.y = direction.y * speed - Vector3.Dot(velocity, zAxis);
-            
+
             float currentAcceleration = GetAcceleration();
-            
+
             adjustment = Vector2.ClampMagnitude(adjustment, currentAcceleration * Time.deltaTime);
-            
+
             velocity += xAxis * adjustment.x + zAxis * adjustment.y;
-            
+
             body.velocity = velocity;
         }
-        
+
         public void AdjustTorque(Quaternion desiredRotation)
         {
             //TODO: Look into using a PID controller for this, also need to solve full rotations as they can rotate the wrong way.
-            
+
             Quaternion rotation = body.rotation;
             Quaternion rotationError = Math.GetShortestRotation(rotation, desiredRotation);
-            
+
             rotationError.ToAngleAxis(out float rotationAngle, out Vector3 rotationAxis);
             rotationAxis.Normalize();
             rotationAxis *= Mathf.Deg2Rad;
-            
-            Vector3 correctionalTorque = rotationAxis * (rotationProportionalGain * rotationAngle) - rotationDerivativeGain * body.angularVelocity;
-            
+
+            Vector3 correctionalTorque = rotationAxis * (rotationProportionalGain * rotationAngle) -
+                                         rotationDerivativeGain * body.angularVelocity;
+
             Quaternion rotInertia2World = body.inertiaTensorRotation * rotation;
-            
+
             correctionalTorque = Quaternion.Inverse(rotInertia2World) * correctionalTorque;
             correctionalTorque.Scale(body.inertiaTensor);
             correctionalTorque = rotInertia2World * correctionalTorque;
-            
+
             body.AddTorque(correctionalTorque);
         }
 
@@ -224,8 +237,8 @@ namespace Player.Movement
             body.velocity += jumpDirection * jumpSpeed;
 
             timeOfCoyoteTimeEnd = 0f;
-            
-            OnJump?.Invoke();
+
+            onJump?.Invoke();
         }
 
         public void ApplyRideForce()
@@ -238,7 +251,7 @@ namespace Player.Movement
             body.MovePosition(position);
             body.velocity = velocity;
         }
-        
+
         public void SetMovementValues(MovementValues values)
         {
             currentValues = values;

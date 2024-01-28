@@ -1,4 +1,5 @@
-﻿using Combat;
+﻿using System.Collections;
+using Combat;
 using General;
 using Player.Movement;
 using Player.Movement.StateMachine;
@@ -8,13 +9,17 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private float knockoutTime = 0.5f;
+
         private MovementComponent movementComponent;
         private MovementStateMachine movementStateMachine;
-        
+
         private TimedEnabler kicker;
 
         private float timeOfJumpRequestEnd;
         
+        private bool isKnockedOut;
+
         //Input
         public Vector2 MoveInput { get; private set; }
         public float DesiredRotation { get; private set; }
@@ -23,10 +28,10 @@ namespace Player
         private void Awake()
         {
             movementComponent = GetComponent<MovementComponent>();
-            
+
             movementStateMachine = new MovementStateMachine(this);
             movementStateMachine.Enter();
-            
+
             kicker = GetComponentInChildren<TimedEnabler>();
 
             DesiredRotation = transform.rotation.eulerAngles.y;
@@ -35,9 +40,9 @@ namespace Player
         private void Update()
         {
             MoveInput = InputHandler.MoveInput;
-            
+
             DesiredRotation += InputHandler.LookInput.Value.x * movementComponent.RotationSpeed * Time.deltaTime;
-            
+
             if (InputHandler.JumpInput)
             {
                 IsJumpRequested = InputHandler.JumpInput.Consume();
@@ -47,7 +52,7 @@ namespace Player
             {
                 IsJumpRequested = false;
             }
-            
+
             if (InputHandler.KickInput)
             {
                 kicker.EnableForTime();
@@ -55,14 +60,31 @@ namespace Player
             }
         }
 
+        public void HitResponse(HitData hitData)
+        {
+            StartCoroutine(KnockoutTimer());
+        }
+
         private void FixedUpdate()
         {
+            if (isKnockedOut)
+                return;
+            
             movementStateMachine.Update();
         }
 
         private void OnDestroy()
         {
             movementStateMachine.Exit();
+        }
+
+        private IEnumerator KnockoutTimer()
+        {
+            isKnockedOut = true;
+            
+            yield return new WaitForSeconds(knockoutTime);
+            
+            isKnockedOut = false;
         }
     }
 }

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -5,14 +6,16 @@ namespace Combat
 {
     public class Hittable : MonoBehaviour
     {
-        private Rigidbody body;
-        
+        [SerializeField] private bool separateBody;
+        [SerializeField, EnableIf("separateBody", true)] private Rigidbody body;
+
         [SerializeField] private UnityEvent onHit;
         [SerializeField] private UnityEvent<HitData> onHitWithData;
-        
+
         private void Awake()
         {
-            body = GetComponent<Rigidbody>();
+            if (!separateBody)
+                body = GetComponent<Rigidbody>();
         }
 
         public void Hit(HitData hitData)

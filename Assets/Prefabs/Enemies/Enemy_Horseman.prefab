@@ -1,5 +1,91 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5095296464440299380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1243732616104500290}
+  - component: {fileID: 9021074091649946858}
+  - component: {fileID: 3531236707324012733}
+  - component: {fileID: 4563678051808460181}
+  m_Layer: 10
+  m_Name: Kickbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1243732616104500290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5095296464440299380}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.82}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8540934264470247154}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9021074091649946858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5095296464440299380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1312a9f52b2b4fecbf0d03994b5b4b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitForce: 30
+  hitType: 1
+  customHitDirection: {x: 0, y: 0.4472136, z: 0.8944272}
+--- !u!114 &3531236707324012733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5095296464440299380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186848e623a7493f8f6c5d3b2b4e8d59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToEnable: 0.1
+  onEnable:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &4563678051808460181
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5095296464440299380}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.96, y: 2, z: 1.3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5458758821850232104
 GameObject:
   m_ObjectHideFlags: 0
@@ -37,6 +123,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1243732616104500290}
   - {fileID: 6783884766720362714}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -53,7 +140,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockoutTime: 2
+  attackCooldown: 1.5
   rigRoot: {fileID: 385947831815767672}
+  onAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3531236707324012733}
+        m_TargetAssemblyTypeName: General.TimedEnabler, Assembly-CSharp
+        m_MethodName: EnableForTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &560996645534305076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,8 +262,8 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   acceleration: 5
   rotationSpeed: 360
-  slowdownTime: 0.2
-  endReachedDistance: 0.5
+  slowdownTime: 0
+  endReachedDistance: 3
   wallForce: 3
   wallDist: 1
   funnelSimplification: 0
@@ -352,6 +455,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4485518341928829513}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c3fc240cbb8975c41bba83fe862ef2bd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3822890238890706592}
     - targetCorrespondingSourceObject: {fileID: 5692363959232306509, guid: c3fc240cbb8975c41bba83fe862ef2bd,
         type: 3}
       insertIndex: -1
@@ -1069,6 +1176,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2d78a9d02f48e98cd9a75f80bbf610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3822890238890706592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6156108344206381664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82fa53d72fbcc5e47bf391a0cdbf6997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 206176732298027590}
+        m_TargetAssemblyTypeName: Enemy.EnemyController, Assembly-CSharp
+        m_MethodName: AttackResponse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onAttackEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 206176732298027590}
+        m_TargetAssemblyTypeName: Enemy.EnemyController, Assembly-CSharp
+        m_MethodName: AttackEndResponse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6556337667449605718 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 239605998403756391, guid: c3fc240cbb8975c41bba83fe862ef2bd,
