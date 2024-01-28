@@ -10,11 +10,20 @@ using UnityEngine.Events;
 
 namespace Enemy
 {
+    public enum AttackStopType
+    {
+        AttackInitiated,
+        AttackHit,
+        AttackEnd
+    }
+    
     public class EnemyController : MonoBehaviour
     {
         [SerializeField] private float knockoutTime = 2f;
         [SerializeField] private float attackCooldown = 2f;
         [SerializeField] private Transform rigRoot;
+        
+        [SerializeField] private AttackStopType attackStopType = AttackStopType.AttackInitiated;
 
         [SerializeField, FoldoutGroup("Events")]
         private UnityEvent onAttack;
@@ -55,6 +64,21 @@ namespace Enemy
             {
                 InitiateAttack();
             }
+
+            if (currentState == EnemyState.Attacking)
+            {
+                Vector3 direction = (aiPather.destination - transform.position);
+                direction.y = 0;
+                direction.Normalize();
+
+                // aiPather.SimulateRotationTowards(direction, 360 / Time.deltaTime);
+                
+                Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+                body.MoveRotation(rotation);
+            }
+            
+            if (transform.position.y < -10)
+                Destroy(gameObject);
         }
 
         private void LateUpdate()
@@ -70,6 +94,9 @@ namespace Enemy
             if (currentState == EnemyState.Attacking)
                 return;
 
+            if (attackStopType == AttackStopType.AttackInitiated)
+                aiPather.canMove = false;
+            
             animator.SetBool(AttackOnCooldownAnim, true);
             currentState = EnemyState.Attacking;
             animator.SetTrigger(AttackAnim);
@@ -77,12 +104,17 @@ namespace Enemy
 
         public void AttackResponse()
         {
-            aiPather.canMove = false;
+            if (attackStopType == AttackStopType.AttackHit)
+                aiPather.canMove = false;
+            
             onAttack?.Invoke();
         }
 
         public void AttackEndResponse()
         {
+            if (attackStopType == AttackStopType.AttackEnd)
+                aiPather.canMove = false;
+            
             StartCoroutine(AttackCooldown());
         }
 

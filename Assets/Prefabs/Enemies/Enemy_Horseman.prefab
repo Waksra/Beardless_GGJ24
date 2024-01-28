@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1312a9f52b2b4fecbf0d03994b5b4b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitForce: 30
+  hitForce: 40
   hitType: 1
   customHitDirection: {x: 0, y: 0.4472136, z: 0.8944272}
 --- !u!114 &3531236707324012733
@@ -142,6 +142,7 @@ MonoBehaviour:
   knockoutTime: 2
   attackCooldown: 1.5
   rigRoot: {fileID: 385947831815767672}
+  attackStopType: 0
   onAttack:
     m_PersistentCalls:
       m_Calls:
@@ -169,6 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a553fd61a68645d591101cc26da2e6f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  separateBody: 0
+  body: {fileID: 0}
   onHit:
     m_PersistentCalls:
       m_Calls:

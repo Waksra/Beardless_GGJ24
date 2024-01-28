@@ -53,16 +53,20 @@ namespace Player
                 IsJumpRequested = false;
             }
 
-            if (InputHandler.KickInput)
+            if (InputHandler.KickInput) 
             {
                 kicker.EnableForTime();
                 InputHandler.KickInput.Consume();
             }
+            
+            //TODO: Game over screen
+            if (transform.position.y < -10)
+                transform.position = Vector3.zero;
         }
 
         public void HitResponse(HitData hitData)
         {
-            StartCoroutine(KnockoutTimer());
+            movementStateMachine.ChangeState(StateFactory.KnockedOutState(movementStateMachine, knockoutTime));
         }
 
         private void FixedUpdate()
@@ -76,15 +80,6 @@ namespace Player
         private void OnDestroy()
         {
             movementStateMachine.Exit();
-        }
-
-        private IEnumerator KnockoutTimer()
-        {
-            isKnockedOut = true;
-            
-            yield return new WaitForSeconds(knockoutTime);
-            
-            isKnockedOut = false;
         }
     }
 }

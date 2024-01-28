@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a52528ba59982af4da3f6ffcca6c914d
+guid: acedf4c87067ff74f96c33cd0e8a1924
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,18 +33,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: slap
+      name: idle
       takeName: root|rigAction
       internalID: -5729030048419175771
-      firstFrame: 60
-      lastFrame: 181
+      firstFrame: 1
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -56,23 +56,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.78163266
-        functionName: Attack
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 82fa53d72fbcc5e47bf391a0cdbf6997,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.9484193
-        functionName: AttackEnd
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 82fa53d72fbcc5e47bf391a0cdbf6997,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
